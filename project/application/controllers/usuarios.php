@@ -21,7 +21,7 @@ class Usuarios extends CI_Controller {
 	{
 		$this->load->view('alta_usuarios');
 	}
-}//try commit.
+}
 
 /* End of file welcome.php */
 /* Location: ./application/controllers/Usuarios.php */
