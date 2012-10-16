@@ -1,73 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Modificacion de Cliente</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Registro de Clientes</title>
+	<script src="<?php echo base_url()?>assets/jquery/js/jquery-1.8.2.js"></script>
+	<script src="<?php echo base_url()?>assets/jquery/js/jquery-ui-1.9.0.custom.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url()?>assets/jquery/css/jquery-ui-1.9.0.custom.css">
 </head>
+ <script>
+ 
+	 
+	
+    $(function() {
+    	 $("#txtFechaInicio").datepicker();
+    	 $( "#txtFechaInicio" ).datepicker("dateFormat", "yy-mm-dd" );
+    	 $("#txtFechaInicio").datepicker({defaultDate: '2011-22-12'});
+    	
+    	 
+    	 
+    });
+  </script>
+
 <body>
 <form action="<?php echo base_url()."clientes/edita/"?>" method="post">
 <div id="contenedor">
-<input type="hidden" value="<?php echo $idCliente;?>" id="idCliente" name="idCliente">
-<div id="input">
-<label>Nombre:</label><input id="txtNombre" name="txtNombre" value="<?php echo $datos_cliente['nombre'];?>"/>
-</div>
-<div id="input">
-<label>Giro:</label><input id="txtGiro" name="txtGiro" value="<?php echo $datos_cliente['giro'];?>"/>
-</div>
-<div id="input">
-<label>Productos:</label><input id="txtProductos" name="txtProductos" value="<?php echo $datos_cliente['productos'];?>"/>
-</div>
-<div id="input">
-<label>Mercado potencial:</label><input id="txtMercadoPotencial" name="txtMercadoPotencial" value="<?php echo $datos_cliente['mercado_potencial'];?>"/>
-</div>
-<div id="input">
-<label>Horario:</label><input id="txtHorario" name="txtHorario" value="<?php echo $datos_cliente['horario'];?>"/>
-</div>
-<div id="input">
-<label>Telefono:</label><input id="txtTelefono" name="txtTelefono" value="<?php echo $datos_cliente['telefono'];?>"/>
-</div>
-<div id="input">
-<label>Direccion:</label><input id="txtDireccion" name="txtDireccion" value="<?php echo $datos_cliente['direccion'];?>"/>
-</div>
-<div id="input">
-<label>Correo Electronico:</label><input id="txtCorreoElectronico" name="txtCorreoElectronico" value="<?php echo $datos_cliente['correo'];?>"/>
-</div>
-<div id="input">
-<label>Sitio Web:</label><input id="txtSitioWeb" name="txtSitioWeb" value="<?php echo $datos_cliente['sitio_web'];?>"/>
-</div>
-<div id="input">
-<label>Inicio:</label><input id="txtFechaInicio" name="txtFechaInicio" value="<?php echo $datos_cliente['inicio'];?>"/>
-</div>
+<input name="idCliente" id="idCliente" type="hidden" value="<?php echo $idCliente;?>"/>
+<p>
+<label>Nombre:</label><input id="txtNombre" name="txtNombre" required="required" placeholder="Nombre del cliente(*)" value="<?php echo $datos_cliente['nombre'];?>"/>
+</p>
+<p>
+<label>Giro:</label><input id="txtGiro" name="txtGiro" required="required" placeholder="Giro de la empresa(*)" value="<?php echo $datos_cliente['giro'];?>"/>
+</p>
+<p>
+<label>Productos:</label><input id="txtProductos" name="txtProductos" required="required" placeholder="Productos(*)" value="<?php echo $datos_cliente['productos'];?>"/>
+</p>
+<p>
+<label>Mercado potencial:</label><input id="txtMercadoPotencial" name="txtMercadoPotencial" placeholder="Mercado Potencial" value="<?php echo $datos_cliente['mercado_potencial'];?>"/>
+</p>
+<p>
+<label>Horario:</label><input id="txtHorario" name="txtHorario" required="required" placeholder="Horario laboral(*)" value="<?php echo $datos_cliente['horario'];?>"/>
+</p>
+<p>
+<label>Telefono:</label><input id="txtTelefono" name="txtTelefono" required="required" placeholder="Telefono del cliente(*)" value="<?php echo $datos_cliente['telefono'];?>"/>
+</p>
+<p>
+<label>Direccion:</label><input id="txtDireccion" name="txtDireccion" placeholder="Direccion del cliente(*)" value="<?php echo $datos_cliente['direccion'];?>"/>
+</p>
+<p>
+<label>Correo Electronico:</label><input type="email" title="Ingresa un correo electronico." id="txtCorreoElectronico" name="txtCorreoElectronico" placeholder="example@example.com(*)" value="<?php echo $datos_cliente['correo'];?>"/>
+</p>
+<p>
+<label>Sitio Web:</label><input id="txtSitioWeb" name="txtSitioWeb" placeholder="Pagina Web" value="<?php echo $datos_cliente['sitio_web'];?>"/>
+</p>
+<p>
+<label>Inicio:</label><input id="txtFechaInicio" name="txtFechaInicio" required="required" placeholder="Fecha de registro de FanPage(*)" value="<?php echo $datos_cliente['inicio'];?>"/>
+</p>
 <h1>Datos de encargado</h1>
-<div id="input">
-<label>Nombre:</label><input id="txtNombreEncargado" name="txtNombreEncargado" value="<?php echo $datos_cliente['nombre_encargado'];?>"/>
-</div>
-<div id="input">
-<label>Apellido:</label><input id="txtApellidoEncargado" name="txtApellidoEncargado" value="<?php echo $datos_cliente['apellido_encargado'];?>"/>
-</div>
-<div id="input">
-<label>Correo Electronico:</label><input id="txtCorreoEncargado" name="txtCorreoEncargado" value="<?php echo $datos_cliente['correo_encargado'];?>"/>
-</div>
-<div id="input">
-<label>Telefono:</label><input id="txtTelefonoEncargado" name="txtTelefonoEncargado" value="<?php echo $datos_cliente['telefono_encargado'];?>"/>
-</div>
-<div id="input">
-<label>Extencion:</label><input id="txtExtencion" name="txtExtencion" value="<?php echo $datos_cliente['extencion_encargado'];?>"/>
-</div>
-<div id="input">
-<label>Skype:</label><input id="txtSkype" name="txtSkype" value="<?php echo $datos_cliente['skype_encargado'];?>"/>
-</div>
-<div id="input">
-<label>Usuario:</label><input id="txtUsuario" name="txtUsuario" value="<?php echo $datos_cliente['usuario'];?>"/>
-</div>
-<div id="input">
-<label>Contrase–a:</label><input id="txtPassword" name="txtPassword" value="<?php echo $datos_cliente['password'];?>"/>
-</div>
-<div id="input">
-<label>Usuario:</label><select id="cmbUsuario" name="cmbUsuario">
+<p>
+<label>Nombre:</label><input id="txtNombreEncargado" name="txtNombreEncargado" required="required" placeholder="Nombre del Encargado(*)" value="<?php echo $datos_cliente['nombre_encargado'];?>"/>
+</p>
+<p>
+<label>Apellido:</label><input id="txtApellidoEncargado" name="txtApellidoEncargado" required="required" placeholder="Apellido del Encargado(*)" value="<?php echo $datos_cliente['apellido_encargado'];?>"/>
+</p>
+<p>
+<label>Correo Electronico:</label><input type="email" title="Ingresa un correo electronico." id="txtCorreoEncargado" name="txtCorreoEncargado" placeholder="Email del Encargado" value="<?php echo $datos_cliente['correo_encargado'];?>"/>
+</p>
+<p>
+<label>Telefono:</label><input id="txtTelefonoEncargado" name="txtTelefonoEncargado" placeholder="Telefono del Encargado"  value="<?php echo $datos_cliente['telefono_encargado'];?>"/>
+</p>
+<p>
+<label>Extencion:</label><input id="txtExtencion" name="txtExtencion" placeholder="Extencion" value="<?php echo $datos_cliente['extencion_encargado'];?>"/>
+</p>
+<p>
+<label>Skype:</label><input id="txtSkype" name="txtSkype" placeholder="Skype del encargado" value="<?php echo $datos_cliente['skype_encargado'];?>"/>
+</p>
+<p>
+<label>Usuario:</label><input id="txtUsuario" name="txtUsuario" required="required" placeholder="Usuario(*)" value="<?php echo $datos_cliente['usuario'];?>"/>
+</p>
+<p>
+<label>Contrase&ntilde;a:</label><input id="txtPassword" name="txtPassword" required="required" placeholder="Contrase&ntilde;a(*)" value="<?php echo $datos_cliente['password'];?>"/>
+</p>
+<p>
+<label>Usuario:</label><select id="cmbUsuario" name="cmbUsuario" required="required">
 						<option value="1">1</option>
 						</select>
-</div>
+</p>
 <input type="submit" value="Agregar">
 </div>
 </form>

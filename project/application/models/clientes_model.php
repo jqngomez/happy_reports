@@ -4,6 +4,19 @@ class Clientes_Model extends CI_Model{
         parent::__construct();
         $this->load->database();
     }
+    
+    public function getClientes(){
+    	$this->db->select('*')->from('clientes')->where('status', 1);
+    	$query = $this->db->get();
+    	if($query->num_rows()>0){
+            foreach($query->result() as $fila){
+                $data[]=$fila;
+            }
+            return $data;
+        }
+        else
+            return false;
+    }
 
 	public function alta($array){
 		$query = $this->db->insert('clientes',$array);
@@ -15,7 +28,7 @@ class Clientes_Model extends CI_Model{
 	
 	public function eliminar($id){
     	$this->db->where('idCliente',$id);
-    	$this->db->update('clientes',array('idCliente'=>0));
+    	$this->db->update('clientes',array('status'=>0));
     	return true;
 	}
 	

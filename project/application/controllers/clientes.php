@@ -83,7 +83,7 @@ class Clientes extends CI_Controller {
 		$alta_arr['direccion'] = $this->input->post('txtDireccion');
 		$alta_arr['correo'] = $this->input->post('txtCorreoElectronico');
 		$alta_arr['sitio_web'] = $this->input->post('txtSitioWeb');
-		$alta_arr['inicio'] = "'".$this->input->post('txtFechaInicio')."'";
+		$alta_arr['inicio'] = $this->input->post('txtFechaInicio');
 		$alta_arr['nombre_encargado'] = $this->input->post('txtNombreEncargado');
 		$alta_arr['apellido_encargado'] = $this->input->post('txtApellidoEncargado');
 		$alta_arr['correo_encargado'] = $this->input->post('txtCorreoEncargado');
@@ -96,7 +96,6 @@ class Clientes extends CI_Controller {
 		$alta_arr['fecha'] = date("Y-m-d");   
 		$alta_arr['hora'] = date("H:i:s");
 		$alta_arr['status'] = 1;
-		
 		
 		$idCliente = $this->clientes_model->alta($alta_arr);
 		if($idCliente>0){
