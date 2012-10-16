@@ -5,6 +5,19 @@ class Redes_model extends CI_Model{
         $this->load->database();
     }
     
+    public function getRedes(){
+    	$this->db->select('*')->from('redes_sociales')->where('status', 1);
+    	$query = $this->db->get();
+    	if($query->num_rows()>0){
+    		foreach($query->result() as $fila){
+    			$data[]=$fila;
+    		}
+    		return $data;
+    	}
+    	else
+    		return false;
+    }
+    
     public function getRed($id){
     	$this->db->select("*")->from("redes_sociales")->where("idRed", $id);
     	$query = $this->db->get();

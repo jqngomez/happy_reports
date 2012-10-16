@@ -22,7 +22,7 @@
 <label>Password:</label><input id="txtPassword" name="txtPassword" required="required" placeholder="Password(*)"/>
 </p>
 <p>
-<label>Usuario:</label><select id="cmbCliente" name="cmbCliente" required="required">
+<label>Usuario:</label><select id="cmbCliente" name="cmbCliente" >
 						<?php foreach ($clientes as $cliente){?>
 						<option value="<?php echo $cliente->idCliente?>"><?php echo $cliente->nombre;?></option>
 						<?php }?>

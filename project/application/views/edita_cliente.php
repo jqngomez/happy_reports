@@ -81,7 +81,7 @@
 <label>Contrase&ntilde;a:</label><input id="txtPassword" name="txtPassword" required="required" placeholder="Contrase&ntilde;a(*)" value="<?php echo $datos_cliente['password'];?>"/>
 </p>
 <p>
-<label>Usuario:</label><select id="cmbUsuario" name="cmbUsuario" required="required">
+<label>Usuario:</label><select id="cmbUsuario" name="cmbUsuario">
 						<option value="1">1</option>
 						</select>
 </p>

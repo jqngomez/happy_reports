@@ -23,9 +23,14 @@ class Cuentas extends CI_Controller {
 	}
 	
 	public function index(){
+		$data['cuentas'] = $this->cuentas_model->getCuentas();
+		$this->load->view('lista_cuentas', $data);
+	}
+	
+	public function nuevo(){
 		$arreglo['clientes'] = $this->clientes_model->getClientes();
 		if($arreglo['clientes']){
-		$this->load->view('alta_cuenta',$arreglo);
+			$this->load->view('alta_cuenta',$arreglo);
 		}else{
 			echo 'Es necesario registrar clientes para crear una cuenta. <a href="'.base_url().'clientes/">CLIC AQUI PARA DAR DE ALTA CLIENTE</a>';
 		}

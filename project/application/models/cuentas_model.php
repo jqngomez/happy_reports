@@ -5,6 +5,19 @@ class Cuentas_Model extends CI_Model{
         $this->load->database();
     }
     
+    public function getCuentas(){
+    	$this->db->select('*')->from('cuentas')->where('status', 1);
+    	$query = $this->db->get();
+    	if($query->num_rows()>0){
+    		foreach($query->result() as $fila){
+    			$data[]=$fila;
+    		}
+    		return $data;
+    	}
+    	else
+    		return false;
+    }
+    
     public function getCuenta($id){
     	$this->db->select("*")->from("cuentas")->where("idCuenta", $id);
     	$query = $this->db->get();

@@ -21,6 +21,11 @@ class Clientes extends CI_Controller {
 	
 	public function index()
 	{
+		$data['clientes'] = $this->clientes_model->getClientes();
+		$this->load->view('lista_clientes', $data);
+	}
+	
+	public function nuevo(){
 		$this->load->view('alta_cliente');
 	}
 	
@@ -99,7 +104,7 @@ class Clientes extends CI_Controller {
 		
 		$idCliente = $this->clientes_model->alta($alta_arr);
 		if($idCliente>0){
-			echo 'Se dio de alta exitosamente el cliente: '.$idCliente;
+			echo 'Se dio de alta exitosamente el cliente: '.$idCliente. ' <a href="'.base_url().'clientes/">Regresar</a>';
 		}else{
 			echo 'Error al dar de alta cliente';
 		}

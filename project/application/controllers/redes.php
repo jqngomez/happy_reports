@@ -21,6 +21,11 @@ class Redes extends CI_Controller {
 	
 	public function index()
 	{
+		$data['redes'] = $this->redes_model->getRedes();
+		$this->load->view('lista_redes', $data);
+	}
+	
+	public function nuevo(){
 		$this->load->view('alta_redes');
 	}
 	
