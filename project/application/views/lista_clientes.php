@@ -9,7 +9,7 @@
 </head>
 <style>
 	#tabla{
-		width: 300px;
+		width: 400px;
 		background-color: red;
 	}
 	
@@ -27,6 +27,11 @@
 		width: 70px;
 		display: inline-block;
 	}
+	
+	#cuentas{
+		width: 60px;
+		display: inline-block;
+	}
 </style>
 
 
@@ -39,11 +44,13 @@
 <div id="nombre">Nombre</div>
 <div id="editar">Editar</div>
 <div id="eliminar">Eliminar</div>
+<div id="cuentas">Cuentas</div>
 <?php 
 foreach ($clientes as $cliente){ ?>
 <div id="nombre"><?php echo $cliente->nombre;?></div>
 <div id="editar"><a href="<?php echo base_url().'clientes/modificar/'.$cliente->idCliente;?>">MOD</a></div>
 <div id="eliminar"><a href="<?php echo base_url().'clientes/baja/'.$cliente->idCliente;?>">ELI</a></div>
+<div id="cuentas"><a href="<?php echo base_url().'cuentas/cliente/'.$cliente->idCliente;?>">ADMIN</a></div>
 <?php }?>
 </div>
 <ul>

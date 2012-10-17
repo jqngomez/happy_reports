@@ -18,13 +18,23 @@ class Cuentas extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->model('clientes_model');
 		$this->load->model('cuentas_model');
+		$this->load->model('redes_model');
 		
 		
 	}
 	
+	
 	public function index(){
 		$data['cuentas'] = $this->cuentas_model->getCuentas();
 		$this->load->view('lista_cuentas', $data);
+	}
+	
+	
+	public function cliente($id){
+			$data['idCliente'] = $id;
+			$data['redes'] = $this->redes_model->getRedes();
+			$data['datos'] = $this->cuentas_model->getCuentasByCliente($id);
+			$this->load->view('cuentas_cliente',$data);
 	}
 	
 	public function nuevo(){
@@ -38,7 +48,6 @@ class Cuentas extends CI_Controller {
 	
 	public function edita(){
 		$id = $this->input->post('idCuenta');
-		$alta_arr['idCliente'] = $this->input->post('cmbCliente');
 		$alta_arr['nombre'] = $this->input->post('txtNombre');
 		$alta_arr['usuario'] = $this->input->post('txtUsuario');
 		$alta_arr['password'] = $this->input->post('txtPassword');
@@ -72,22 +81,39 @@ class Cuentas extends CI_Controller {
 	}
 	
 	public function alta(){
-		$alta_arr['idCliente'] = $this->input->post('cmbCliente');
-		$alta_arr['nombre'] = $this->input->post('txtNombre');
-		$alta_arr['usuario'] = $this->input->post('txtUsuario');
-		$alta_arr['password'] = $this->input->post('txtPassword');
-		$alta_arr['fecha'] = date("Y-m-d");   
-		$alta_arr['hora'] = date("H:i:s");
-		$alta_arr['status'] = 1;
+		$redes = $this->redes_model->getRedes();
+		$idCliente = $this->input->post('idCliente');
+		foreach ($redes as $red){
+			if($this->input->post('cuenta'.$red->idRed)){
+				$id = $this->input->post('cuenta'.$red->idRed);
+				$alta_arr['idCliente'] = $idCliente;
+				$alta_arr['nombre'] = $this->input->post('txtNombre'.$red->idRed);
+				$alta_arr['usuario'] = $this->input->post('txtUsuario'.$red->idRed);
+				$alta_arr['password'] = $this->input->post('txtPassword'.$red->idRed);
+				$alta_arr['idRed'] = $red->idRed;
+				$alta_arr['fecha'] = date("Y-m-d");
+				$alta_arr['hora'] = date("H:i:s");
+				$alta_arr['status'] = 1;
 		
-		$idCuenta = $this->cuentas_model->alta($alta_arr);
+				if($this->cuentas_model->edita($alta_arr,$id))
+					echo 'Se modifico la cuenta: '.$id;
+				else echo 'Error al modificar: '.$id;
 		
-		if($idCuenta>0){
-			echo 'Se dio de alta exitosamente la cuenta: '.$idCuenta;
-		}else{
-			echo 'Error al dar de alta la cuenta';
-		}
-		
+ 			}elseif($this->input->post("chk".$red->idRed)=='on'){
+				$alta_arr['idCliente'] = $idCliente;
+				$alta_arr['nombre'] = $this->input->post('txtNombre'.$red->idRed);
+				$alta_arr['usuario'] = $this->input->post('txtUsuario'.$red->idRed);
+				$alta_arr['password'] = $this->input->post('txtPassword'.$red->idRed);
+				$alta_arr['idRed'] = $red->idRed;
+				$alta_arr['fecha'] = date("Y-m-d");
+				$alta_arr['hora'] = date("H:i:s");
+				$alta_arr['status'] = 1;
+				$idCuenta = $this->cuentas_model->alta($alta_arr);
+				if($idCuenta>0)
+					echo 'Se agrego la cuenta: '.$idCuenta;
+				else echo 'Error al agregar cuenta: '.$idCuenta;
+ 			}
+		}		
 	}
 }
 

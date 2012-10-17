@@ -31,9 +31,7 @@
 
 
 <body>
-<ul>
-<li><a href="<?php echo base_url()?>cuentas/nuevo/">Nuevo</a></li>
-</ul>
+
 
 <div id="tabla">
 <div id="nombre">Nombre</div>
