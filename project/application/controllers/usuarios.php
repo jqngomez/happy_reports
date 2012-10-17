@@ -20,7 +20,7 @@ class Usuarios extends CI_Controller {
         public function __construct() {
             parent::__construct();
             $this->load->helper('url');
-            $this->load->model('altaUsuarios_model');
+            $this->load->model('usuarios_model');
             $this->load->library('pagination');
             $this->load->library('email');          
             $this->load->library('session');
@@ -28,9 +28,9 @@ class Usuarios extends CI_Controller {
         }
 	public function index() {
                 if($this->session->userdata('idUsuario')){
-                    $data['usuarioData']=$this->altaUsuarios_model->getDatosUsuarioModel(@$idUsuario);
-                    $data['usuariosData']=$this->altaUsuarios_model->getDatosUsuariosModel();
-                    $data['tipos']=$this->altaUsuarios_model->getTipos();
+                    $data['usuarioData']=$this->usuarios_model->getDatosUsuarioModel(@$idUsuario);
+                    $data['usuariosData']=$this->usuarios_model->getDatosUsuariosModel();
+                    $data['tipos']=$this->usuarios_model->getTipos();
                     $this->load->view('alta_usuarios',$data);
                 }else{
                     $this->load->view('login');
@@ -61,10 +61,10 @@ class Usuarios extends CI_Controller {
                 }
                 if($bandera!=0){
 //                    echo "we";
-                    $this->altaUsuarios_model->agregarModel($guardarData);
-                    $data['usuariosData']=$this->altaUsuarios_model->getDatosUsuariosModel();
-                    $data['tipos']=$this->altaUsuarios_model->getTipos();
-                    $data['usuariosData']=$this->altaUsuarios_model->getDatosUsuariosModel();
+                    $this->usuarios_model->agregarModel($guardarData);
+                    $data['usuariosData']=$this->usuarios_model->getDatosUsuariosModel();
+                    $data['tipos']=$this->usuarios_model->getTipos();
+                    $data['usuariosData']=$this->usuarios_model->getDatosUsuariosModel();
                     $this->load->view('alta_usuarios',$data);
                 }else{
                     redirect();
@@ -74,15 +74,15 @@ class Usuarios extends CI_Controller {
             }
 	}
         public function eliminarUsuarios($id) {
-            $flag=$this->altaUsuarios_model->eliminarModel($id);
+            $flag=$this->usuarios_model->eliminarModel($id);
             if($flag==true){$data['error']="Eliminado";}else{$data['error']="Usuario no existente";}
             redirect();
 	}
         public function modificarUsuarios($id) {
             if($this->session->userdata('idUsuario')){
-                $data['usuarioData']=$this->altaUsuarios_model->getDatosUsuarioModel($id);
-                $data['usuariosData']=$this->altaUsuarios_model->getDatosUsuariosModel();
-                $data['tipos']=$this->altaUsuarios_model->getTipos();
+                $data['usuarioData']=$this->usuarios_model->getDatosUsuarioModel($id);
+                $data['usuariosData']=$this->usuarios_model->getDatosUsuariosModel();
+                $data['tipos']=$this->usuarios_model->getTipos();
                 $nombre=$this->input->post('nombre');
                 $apellido=$this->input->post('apellido');
                 $usuario=$this->input->post('usuario');
@@ -103,7 +103,7 @@ class Usuarios extends CI_Controller {
             $tipoUsuario=$this->input->post('tipoUsuario');
             $fecha=date("Y-m-d");
             $hora=date("H:i:s");
-            $this->altaUsuarios_model->modificarUsuarioModel($id,$nombre,$apellido,$usuario,$password,$tipoUsuario,$fecha,$hora);
+            $this->usuarios_model->modificarUsuarioModel($id,$nombre,$apellido,$usuario,$password,$tipoUsuario,$fecha,$hora);
             $this->modificarUsuarios($id);
         }
         public function modificarContrasenaView($id) {
@@ -115,7 +115,7 @@ class Usuarios extends CI_Controller {
             $passLast=sha1($this->input->post('passLast'));
             $id=$this->input->post('id');
             //echo json_encode($passLast);
-            $flag=$this->altaUsuarios_model->verificarContrasena($id,$passLast);
+            $flag=$this->usuarios_model->verificarContrasena($id,$passLast);
             echo json_encode($flag);
             //if($flag==true){echo json_encode('1');}else{echo json_encode('2');}
         }
@@ -130,7 +130,7 @@ class Usuarios extends CI_Controller {
             if($passNew!=$passConfirm){
                 redirect(base_url().'usuarios/modificarContrasenaView/'.$id);
             }else{
-                $this->altaUsuarios_model->contrasenaModificada($id,$passLast,$passNew);
+                $this->usuarios_model->contrasenaModificada($id,$passLast,$passNew);
                 redirect(base_url().'usuarios/index/');
             }
             
@@ -139,18 +139,18 @@ class Usuarios extends CI_Controller {
             $usuario=$this->input->post('usuario');
             $pass=sha1($this->input->post('pass'));
             if($this->session->userdata('idUsuario')){
-                $data['usuarioData']=$this->altaUsuarios_model->getDatosUsuarioModel(@$idUsuario);
-                $data['usuariosData']=$this->altaUsuarios_model->getDatosUsuariosModel();
-                $data['tipos']=$this->altaUsuarios_model->getTipos();
+                $data['usuarioData']=$this->usuarios_model->getDatosUsuarioModel(@$idUsuario);
+                $data['usuariosData']=$this->usuarios_model->getDatosUsuariosModel();
+                $data['tipos']=$this->usuarios_model->getTipos();
                 redirect(base_url().'usuarios/loginTest/',$data);
             }else{
-                $idUsuario=$this->altaUsuarios_model->getUsuario($usuario,$pass);
-                $tipo=$this->altaUsuarios_model->getUsuarioTipo($usuario,$pass);
+                $idUsuario=$this->usuarios_model->getUsuario($usuario,$pass);
+                $tipo=$this->usuarios_model->getUsuarioTipo($usuario,$pass);
                 if($idUsuario){
                     $this->session->set_userdata('idUsuario',$idUsuario);
-                    $data['usuarioData']=$this->altaUsuarios_model->getDatosUsuarioModel($idUsuario);
-                    $data['usuariosData']=$this->altaUsuarios_model->getDatosUsuariosModel();
-                    $data['tipos']=$this->altaUsuarios_model->getTipos();
+                    $data['usuarioData']=$this->usuarios_model->getDatosUsuarioModel($idUsuario);
+                    $data['usuariosData']=$this->usuarios_model->getDatosUsuariosModel();
+                    $data['tipos']=$this->usuarios_model->getTipos();
                     $this->load->view('alta_usuarios',$data);
                 }else if($tipo){
                     if($tipo==2){
