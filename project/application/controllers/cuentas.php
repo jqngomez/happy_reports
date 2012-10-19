@@ -19,6 +19,7 @@ class Cuentas extends CI_Controller {
 		$this->load->model('clientes_model');
 		$this->load->model('cuentas_model');
 		$this->load->model('redes_model');
+		$this->load->library('session');
 		
 		
 	}

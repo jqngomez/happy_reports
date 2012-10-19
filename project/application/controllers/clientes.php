@@ -17,6 +17,7 @@ class Clientes extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('clientes_model');
+		$this->load->library('session');
 	}
 	
 	public function index()
